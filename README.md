@@ -16,6 +16,6 @@ a few notes:
 * you can build the lib using 'make' or open the .pro file with Qt Creator
 * there is an example of how to use the lib in the top level directory
 * Some of the methods support grayscale but they all support color
-  * The methods the only support color are GMM methods, WrenGA and PratiMediod
+  * The methods that only support color are GMM methods, WrenGA and PratiMediod
   * This is easily fixed I just haven't had the time
 * Serialization is a WIP
