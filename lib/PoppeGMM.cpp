@@ -51,7 +51,7 @@ void PoppeGMM::Initalize(const cv::Mat& image)
     m_prevModel.resize(m_params.Size());
 
     // used modes per pixel
-    m_modes_per_pixel = cv::Mat::zeros(m_modes_per_pixel.size(), m_modes_per_pixel.type());
+    m_modes_per_pixel = cv::Mat::zeros(m_params.Width(), m_params.Height(), CV_8UC3);
 
 	for(unsigned int i = 0; i < (int)m_modes.size(); ++i)
 	{

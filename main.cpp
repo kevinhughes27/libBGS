@@ -34,12 +34,21 @@ int main(int argc, char *argv[])
     std::string out = argv[2];
     writer.open(out, CV_FOURCC('D','I','V','X'), 30, cv::Size(width,height));
 
-    bgs::AdaptiveMedianParams params;
-    params.SamplingRate() = 7;
-    params.LearningFrames() = 30;
-    params.LowThreshold() = 40;
+	// AdaptiveMedian
+    //bgs::AdaptiveMedianParams params;
+    //params.SamplingRate() = 7;
+    //params.LearningFrames() = 30;
+    //params.LowThreshold() = 40;
+    //params.HighThreshold() = 2*params.LowThreshold();
+    //bgs::AdaptiveMedian bgs(params);
+
+	// GMM
+	bgs::GrimsonParams params;
+    params.Alpha() = 0.001f;
+    params.MaxModes() = 3;
+    params.LowThreshold() = 9;
     params.HighThreshold() = 2*params.LowThreshold();
-    bgs::AdaptiveMedian bgs(params);
+	bgs::GrimsonGMM bgs(params);
 
     cv::namedWindow("Video"); cvMoveWindow("Video", 500, 100);
     cv::namedWindow("Background"); cvMoveWindow("Background", 900, 100);
