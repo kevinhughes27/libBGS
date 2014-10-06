@@ -7,10 +7,10 @@ GrimsonGMM::GrimsonGMM()
     m_params = GrimsonParams();
 
     // Tbf - the threshold
-    m_bg_threshold = 0.75f;	// 1-cf from the paper
+    m_bg_threshold = 0.75f;    // 1-cf from the paper
 
     // Tgenerate - the threshold
-    m_variance = 36.0f;		// sigma for the new mode
+    m_variance = 36.0f;        // sigma for the new mode
 
     m_frame_num = 0;
 }
@@ -20,10 +20,10 @@ GrimsonGMM::GrimsonGMM(const BgsParams &p)
     m_params = (GrimsonParams&)p;
 
     // Tbf - the threshold
-    m_bg_threshold = 0.75f;	// 1-cf from the paper
+    m_bg_threshold = 0.75f;    // 1-cf from the paper
 
     // Tgenerate - the threshold
-    m_variance = 36.0f;		// sigma for the new mode
+    m_variance = 36.0f;        // sigma for the new mode
 
     m_frame_num = 0;
 }
@@ -47,15 +47,15 @@ void GrimsonGMM::Initalize(const cv::Mat& image)
     // used modes per pixel
     m_modes_per_pixel = cv::Mat::zeros(m_params.Width(), m_params.Height(), CV_8UC3);
 
-	for(unsigned int i = 0; i < m_params.Size()*m_params.MaxModes(); ++i)
-	{
-		m_modes[i].weight = 0;
-		m_modes[i].variance = 0;
-		m_modes[i].muR = 0;
-		m_modes[i].muG = 0;
-		m_modes[i].muB = 0;
-		m_modes[i].significants = 0;
-	}
+    for(unsigned int i = 0; i < m_params.Size()*m_params.MaxModes(); ++i)
+    {
+        m_modes[i].weight = 0;
+        m_modes[i].variance = 0;
+        m_modes[i].muR = 0;
+        m_modes[i].muG = 0;
+        m_modes[i].muB = 0;
+        m_modes[i].significants = 0;
+    }
 
     m_background = cv::Mat(m_params.Height(), m_params.Width(), image.type());
 }
@@ -82,26 +82,26 @@ void GrimsonGMM::Subtract(const cv::Mat& image, cv::Mat& low_threshold_mask, cv:
         high_threshold_mask.create(m_params.Height(), m_params.Width(), CV_8U);
 
     unsigned char low_threshold, high_threshold;
-	long posPixel;
+    long posPixel;
 
-	// update each pixel of the image
-	for(unsigned int r = 0; r < m_params.Height(); ++r)
-	{
-		for(unsigned int c = 0; c < m_params.Width(); ++c)
-		{		
-			// update model + background subtract
-			posPixel=(r*m_params.Width()+c)*m_params.MaxModes();
-			
+    // update each pixel of the image
+    for(unsigned int r = 0; r < m_params.Height(); ++r)
+    {
+        for(unsigned int c = 0; c < m_params.Width(); ++c)
+        {
+            // update model + background subtract
+            posPixel=(r*m_params.Width()+c)*m_params.MaxModes();
+
             SubtractPixel(posPixel, image.at<cv::Vec3b>(r,c), m_modes_per_pixel.at<unsigned char>(r,c), low_threshold, high_threshold);
-			
-			low_threshold_mask.at<unsigned char>(r,c) = low_threshold;
-			high_threshold_mask.at<unsigned char>(r,c) = high_threshold;
 
-			m_background.at<cv::Vec3b>(r,c)[0] = (unsigned char)m_modes[posPixel].muR;
-			m_background.at<cv::Vec3b>(r,c)[1] = (unsigned char)m_modes[posPixel].muG;
-			m_background.at<cv::Vec3b>(r,c)[2] = (unsigned char)m_modes[posPixel].muB;
-		}
-	}
+            low_threshold_mask.at<unsigned char>(r,c) = low_threshold;
+            high_threshold_mask.at<unsigned char>(r,c) = high_threshold;
+
+            m_background.at<cv::Vec3b>(r,c)[0] = (unsigned char)m_modes[posPixel].muR;
+            m_background.at<cv::Vec3b>(r,c)[1] = (unsigned char)m_modes[posPixel].muG;
+            m_background.at<cv::Vec3b>(r,c)[2] = (unsigned char)m_modes[posPixel].muB;
+        }
+    }
 
     m_frame_num++;
 }
@@ -246,7 +246,7 @@ void GrimsonGMM::SubtractPixel(long posPixel, const cv::Vec3b& pixel, unsigned c
         m_modes[pos].muG = pixel[1];
         m_modes[pos].muB = pixel[2];
         m_modes[pos].variance = m_variance;
-        m_modes[pos].significants = 0;			// will be set below
+        m_modes[pos].significants = 0;            // will be set below
 
     if (numModes==1)
             m_modes[pos].weight = 1;

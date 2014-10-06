@@ -2,8 +2,8 @@
 *
 * Mean.hpp
 *
-* Purpose: Implementation of a simple temporal mean background 
-*		   subtraction algorithm.
+* Purpose: Implementation of a simple temporal mean background
+*          subtraction algorithm.
 *
 * Author: Donovan Parks, September 2007
 * Modified: Kevin Hughes, 2012
@@ -26,18 +26,18 @@ public:
         m_alpha = 1e-6f;
         m_learning_frames = 30;
         m_low_threshold = 3*30*30;
-        m_high_threshold = 2*m_low_threshold;	// Note: high threshold is used by post-processing
+        m_high_threshold = 2*m_low_threshold;    // Note: high threshold is used by post-processing
     }
 
     float &Alpha() { return m_alpha; }
-	int &LearningFrames() { return m_learning_frames; }
+    int &LearningFrames() { return m_learning_frames; }
 
     void write(cv::FileStorage& fs) const {} // write serialization
     void read(const cv::FileNode& node){} // read serialization
 
 private:
-	float m_alpha;
-	int m_learning_frames;
+    float m_alpha;
+    int m_learning_frames;
 };
 
 class Mean : public Bgs
@@ -60,16 +60,16 @@ public:
     void Subtract(const cv::Mat& image, cv::Mat& low_threshold_mask, cv::Mat& high_threshold_mask);
     void Update(const cv::Mat& image,  const cv::Mat& update_mask);
 
-	cv::Mat Background() { return m_background; }
+    cv::Mat Background() { return m_background; }
 
-private:	
+private:
     void Initalize(const cv::Mat& image);
     void SubtractPixel(int r, int c, const cv::Vec3b& pixel, unsigned char& lowThreshold, unsigned char& highThreshold);
     void SubtractPixel(int r, int c, const unsigned char pixel, unsigned char& low_threshold, unsigned char& high_threshold);
 
-	MeanParams m_params;
-	cv::Mat m_mean;
-	cv::Mat m_background;
+    MeanParams m_params;
+    cv::Mat m_mean;
+    cv::Mat m_background;
 };
 
 }

@@ -16,9 +16,9 @@ CXXFLAGS      = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 INCPATH       = -I/usr/share/qt4/mkspecs/linux-g++ -I. -I/usr/include/qt4 -I.
 LINK          = g++
 LFLAGS        = -Wl,-O1 -shared -Wl,-soname,libbgs.so.1
-LIBS          = $(SUBLIBS)  -L/usr/lib/x86_64-linux-gnu `pkg-config opencv --cflags --libs` -lpthread 
+LIBS          = $(SUBLIBS)  -L/usr/lib/x86_64-linux-gnu `pkg-config opencv --cflags --libs` -lpthread
 AR            = ar cqs
-RANLIB        = 
+RANLIB        =
 QMAKE         = /usr/bin/qmake-qt4
 TAR           = tar -cf
 COMPRESS      = gzip -9f
@@ -44,51 +44,51 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = WrenGA.cpp \
-		PoppeGMM.cpp \
-		GrimsonGMM.cpp \
-		Eigenbackground.cpp \
-		AdaptiveMedian.cpp \
-		Mean.cpp \
-		PratiMediod.cpp \
-		ZivkovicGMM.cpp \
-		SimpleFrameDifferencing.cpp 
+        PoppeGMM.cpp \
+        GrimsonGMM.cpp \
+        Eigenbackground.cpp \
+        AdaptiveMedian.cpp \
+        Mean.cpp \
+        PratiMediod.cpp \
+        ZivkovicGMM.cpp \
+        SimpleFrameDifferencing.cpp
 OBJECTS       = WrenGA.o \
-		PoppeGMM.o \
-		GrimsonGMM.o \
-		Eigenbackground.o \
-		AdaptiveMedian.o \
-		Mean.o \
-		PratiMediod.o \
-		ZivkovicGMM.o \
-		SimpleFrameDifferencing.o
+        PoppeGMM.o \
+        GrimsonGMM.o \
+        Eigenbackground.o \
+        AdaptiveMedian.o \
+        Mean.o \
+        PratiMediod.o \
+        ZivkovicGMM.o \
+        SimpleFrameDifferencing.o
 DIST          = /usr/share/qt4/mkspecs/common/unix.conf \
-		/usr/share/qt4/mkspecs/common/linux.conf \
-		/usr/share/qt4/mkspecs/common/gcc-base.conf \
-		/usr/share/qt4/mkspecs/common/gcc-base-unix.conf \
-		/usr/share/qt4/mkspecs/common/g++-base.conf \
-		/usr/share/qt4/mkspecs/common/g++-unix.conf \
-		/usr/share/qt4/mkspecs/qconfig.pri \
-		/usr/share/qt4/mkspecs/modules/qt_phonon.pri \
-		/usr/share/qt4/mkspecs/modules/qt_webkit_version.pri \
-		/usr/share/qt4/mkspecs/features/qt_functions.prf \
-		/usr/share/qt4/mkspecs/features/qt_config.prf \
-		/usr/share/qt4/mkspecs/features/exclusive_builds.prf \
-		/usr/share/qt4/mkspecs/features/default_pre.prf \
-		/usr/share/qt4/mkspecs/features/release.prf \
-		/usr/share/qt4/mkspecs/features/default_post.prf \
-		/usr/share/qt4/mkspecs/features/unix/gdb_dwarf_index.prf \
-		/usr/share/qt4/mkspecs/features/warn_on.prf \
-		/usr/share/qt4/mkspecs/features/qt.prf \
-		/usr/share/qt4/mkspecs/features/unix/thread.prf \
-		/usr/share/qt4/mkspecs/features/moc.prf \
-		/usr/share/qt4/mkspecs/features/resources.prf \
-		/usr/share/qt4/mkspecs/features/uic.prf \
-		/usr/share/qt4/mkspecs/features/yacc.prf \
-		/usr/share/qt4/mkspecs/features/lex.prf \
-		/usr/share/qt4/mkspecs/features/include_source_dir.prf \
-		bgs.pro
+        /usr/share/qt4/mkspecs/common/linux.conf \
+        /usr/share/qt4/mkspecs/common/gcc-base.conf \
+        /usr/share/qt4/mkspecs/common/gcc-base-unix.conf \
+        /usr/share/qt4/mkspecs/common/g++-base.conf \
+        /usr/share/qt4/mkspecs/common/g++-unix.conf \
+        /usr/share/qt4/mkspecs/qconfig.pri \
+        /usr/share/qt4/mkspecs/modules/qt_phonon.pri \
+        /usr/share/qt4/mkspecs/modules/qt_webkit_version.pri \
+        /usr/share/qt4/mkspecs/features/qt_functions.prf \
+        /usr/share/qt4/mkspecs/features/qt_config.prf \
+        /usr/share/qt4/mkspecs/features/exclusive_builds.prf \
+        /usr/share/qt4/mkspecs/features/default_pre.prf \
+        /usr/share/qt4/mkspecs/features/release.prf \
+        /usr/share/qt4/mkspecs/features/default_post.prf \
+        /usr/share/qt4/mkspecs/features/unix/gdb_dwarf_index.prf \
+        /usr/share/qt4/mkspecs/features/warn_on.prf \
+        /usr/share/qt4/mkspecs/features/qt.prf \
+        /usr/share/qt4/mkspecs/features/unix/thread.prf \
+        /usr/share/qt4/mkspecs/features/moc.prf \
+        /usr/share/qt4/mkspecs/features/resources.prf \
+        /usr/share/qt4/mkspecs/features/uic.prf \
+        /usr/share/qt4/mkspecs/features/yacc.prf \
+        /usr/share/qt4/mkspecs/features/lex.prf \
+        /usr/share/qt4/mkspecs/features/include_source_dir.prf \
+        bgs.pro
 QMAKE_TARGET  = bgs
-DESTDIR       = 
+DESTDIR       =
 TARGET        = libbgs.so.1.0.0
 TARGETA       = libbgs.a
 TARGETD       = libbgs.so.1.0.0
@@ -102,65 +102,65 @@ first: all
 .SUFFIXES: .o .c .cpp .cc .cxx .C
 
 .cpp.o:
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o "$@" "$<"
+    $(CXX) -c $(CXXFLAGS) $(INCPATH) -o "$@" "$<"
 
 .cc.o:
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o "$@" "$<"
+    $(CXX) -c $(CXXFLAGS) $(INCPATH) -o "$@" "$<"
 
 .cxx.o:
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o "$@" "$<"
+    $(CXX) -c $(CXXFLAGS) $(INCPATH) -o "$@" "$<"
 
 .C.o:
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o "$@" "$<"
+    $(CXX) -c $(CXXFLAGS) $(INCPATH) -o "$@" "$<"
 
 .c.o:
-	$(CC) -c $(CFLAGS) $(INCPATH) -o "$@" "$<"
+    $(CC) -c $(CFLAGS) $(INCPATH) -o "$@" "$<"
 
 ####### Build rules
 
 all: Makefile  $(TARGET)
 
-$(TARGET):  $(OBJECTS) $(SUBLIBS) $(OBJCOMP)  
-	-$(DEL_FILE) $(TARGET) $(TARGET0) $(TARGET1) $(TARGET2)
-	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(LIBS) $(OBJCOMP)
-	-ln -s $(TARGET) $(TARGET0)
-	-ln -s $(TARGET) $(TARGET1)
-	-ln -s $(TARGET) $(TARGET2)
+$(TARGET):  $(OBJECTS) $(SUBLIBS) $(OBJCOMP)
+    -$(DEL_FILE) $(TARGET) $(TARGET0) $(TARGET1) $(TARGET2)
+    $(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(LIBS) $(OBJCOMP)
+    -ln -s $(TARGET) $(TARGET0)
+    -ln -s $(TARGET) $(TARGET1)
+    -ln -s $(TARGET) $(TARGET2)
 
 
 
 staticlib: $(TARGETA)
 
-$(TARGETA):  $(OBJECTS) $(OBJCOMP) 
-	-$(DEL_FILE) $(TARGETA) 
-	$(AR) $(TARGETA) $(OBJECTS)
+$(TARGETA):  $(OBJECTS) $(OBJCOMP)
+    -$(DEL_FILE) $(TARGETA)
+    $(AR) $(TARGETA) $(OBJECTS)
 
 Makefile: bgs.pro  /usr/share/qt4/mkspecs/linux-g++/qmake.conf /usr/share/qt4/mkspecs/common/unix.conf \
-		/usr/share/qt4/mkspecs/common/linux.conf \
-		/usr/share/qt4/mkspecs/common/gcc-base.conf \
-		/usr/share/qt4/mkspecs/common/gcc-base-unix.conf \
-		/usr/share/qt4/mkspecs/common/g++-base.conf \
-		/usr/share/qt4/mkspecs/common/g++-unix.conf \
-		/usr/share/qt4/mkspecs/qconfig.pri \
-		/usr/share/qt4/mkspecs/modules/qt_phonon.pri \
-		/usr/share/qt4/mkspecs/modules/qt_webkit_version.pri \
-		/usr/share/qt4/mkspecs/features/qt_functions.prf \
-		/usr/share/qt4/mkspecs/features/qt_config.prf \
-		/usr/share/qt4/mkspecs/features/exclusive_builds.prf \
-		/usr/share/qt4/mkspecs/features/default_pre.prf \
-		/usr/share/qt4/mkspecs/features/release.prf \
-		/usr/share/qt4/mkspecs/features/default_post.prf \
-		/usr/share/qt4/mkspecs/features/unix/gdb_dwarf_index.prf \
-		/usr/share/qt4/mkspecs/features/warn_on.prf \
-		/usr/share/qt4/mkspecs/features/qt.prf \
-		/usr/share/qt4/mkspecs/features/unix/thread.prf \
-		/usr/share/qt4/mkspecs/features/moc.prf \
-		/usr/share/qt4/mkspecs/features/resources.prf \
-		/usr/share/qt4/mkspecs/features/uic.prf \
-		/usr/share/qt4/mkspecs/features/yacc.prf \
-		/usr/share/qt4/mkspecs/features/lex.prf \
-		/usr/share/qt4/mkspecs/features/include_source_dir.prf
-	$(QMAKE) -spec /usr/share/qt4/mkspecs/linux-g++ -o Makefile bgs.pro
+        /usr/share/qt4/mkspecs/common/linux.conf \
+        /usr/share/qt4/mkspecs/common/gcc-base.conf \
+        /usr/share/qt4/mkspecs/common/gcc-base-unix.conf \
+        /usr/share/qt4/mkspecs/common/g++-base.conf \
+        /usr/share/qt4/mkspecs/common/g++-unix.conf \
+        /usr/share/qt4/mkspecs/qconfig.pri \
+        /usr/share/qt4/mkspecs/modules/qt_phonon.pri \
+        /usr/share/qt4/mkspecs/modules/qt_webkit_version.pri \
+        /usr/share/qt4/mkspecs/features/qt_functions.prf \
+        /usr/share/qt4/mkspecs/features/qt_config.prf \
+        /usr/share/qt4/mkspecs/features/exclusive_builds.prf \
+        /usr/share/qt4/mkspecs/features/default_pre.prf \
+        /usr/share/qt4/mkspecs/features/release.prf \
+        /usr/share/qt4/mkspecs/features/default_post.prf \
+        /usr/share/qt4/mkspecs/features/unix/gdb_dwarf_index.prf \
+        /usr/share/qt4/mkspecs/features/warn_on.prf \
+        /usr/share/qt4/mkspecs/features/qt.prf \
+        /usr/share/qt4/mkspecs/features/unix/thread.prf \
+        /usr/share/qt4/mkspecs/features/moc.prf \
+        /usr/share/qt4/mkspecs/features/resources.prf \
+        /usr/share/qt4/mkspecs/features/uic.prf \
+        /usr/share/qt4/mkspecs/features/yacc.prf \
+        /usr/share/qt4/mkspecs/features/lex.prf \
+        /usr/share/qt4/mkspecs/features/include_source_dir.prf
+    $(QMAKE) -spec /usr/share/qt4/mkspecs/linux-g++ -o Makefile bgs.pro
 /usr/share/qt4/mkspecs/common/unix.conf:
 /usr/share/qt4/mkspecs/common/linux.conf:
 /usr/share/qt4/mkspecs/common/gcc-base.conf:
@@ -187,24 +187,24 @@ Makefile: bgs.pro  /usr/share/qt4/mkspecs/linux-g++/qmake.conf /usr/share/qt4/mk
 /usr/share/qt4/mkspecs/features/lex.prf:
 /usr/share/qt4/mkspecs/features/include_source_dir.prf:
 qmake:  FORCE
-	@$(QMAKE) -spec /usr/share/qt4/mkspecs/linux-g++ -o Makefile bgs.pro
+    @$(QMAKE) -spec /usr/share/qt4/mkspecs/linux-g++ -o Makefile bgs.pro
 
-dist: 
-	@$(CHK_DIR_EXISTS) .tmp/bgs1.0.0 || $(MKDIR) .tmp/bgs1.0.0 
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/bgs1.0.0/ && $(COPY_FILE) --parents WrenGA.hpp PoppeGMM.hpp GrimsonGMM.hpp Eigenbackground.hpp BgsParams.hpp PratiMediod.hpp Mean.hpp AdaptiveMedian.hpp Bgs.hpp ZivkovicGMM.hpp libBGS.h SimpleFrameDifferencing.hpp .tmp/bgs1.0.0/ && $(COPY_FILE) --parents WrenGA.cpp PoppeGMM.cpp GrimsonGMM.cpp Eigenbackground.cpp AdaptiveMedian.cpp Mean.cpp PratiMediod.cpp ZivkovicGMM.cpp SimpleFrameDifferencing.cpp .tmp/bgs1.0.0/ && (cd `dirname .tmp/bgs1.0.0` && $(TAR) bgs1.0.0.tar bgs1.0.0 && $(COMPRESS) bgs1.0.0.tar) && $(MOVE) `dirname .tmp/bgs1.0.0`/bgs1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/bgs1.0.0
+dist:
+    @$(CHK_DIR_EXISTS) .tmp/bgs1.0.0 || $(MKDIR) .tmp/bgs1.0.0
+    $(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/bgs1.0.0/ && $(COPY_FILE) --parents WrenGA.hpp PoppeGMM.hpp GrimsonGMM.hpp Eigenbackground.hpp BgsParams.hpp PratiMediod.hpp Mean.hpp AdaptiveMedian.hpp Bgs.hpp ZivkovicGMM.hpp libBGS.h SimpleFrameDifferencing.hpp .tmp/bgs1.0.0/ && $(COPY_FILE) --parents WrenGA.cpp PoppeGMM.cpp GrimsonGMM.cpp Eigenbackground.cpp AdaptiveMedian.cpp Mean.cpp PratiMediod.cpp ZivkovicGMM.cpp SimpleFrameDifferencing.cpp .tmp/bgs1.0.0/ && (cd `dirname .tmp/bgs1.0.0` && $(TAR) bgs1.0.0.tar bgs1.0.0 && $(COMPRESS) bgs1.0.0.tar) && $(MOVE) `dirname .tmp/bgs1.0.0`/bgs1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/bgs1.0.0
 
 
-clean:compiler_clean 
-	-$(DEL_FILE) $(OBJECTS)
-	-$(DEL_FILE) *~ core *.core
+clean:compiler_clean
+    -$(DEL_FILE) $(OBJECTS)
+    -$(DEL_FILE) *~ core *.core
 
 
 ####### Sub-libraries
 
 distclean: clean
-	-$(DEL_FILE) $(TARGET) 
-	-$(DEL_FILE) $(TARGET0) $(TARGET1) $(TARGET2) $(TARGETA)
-	-$(DEL_FILE) Makefile
+    -$(DEL_FILE) $(TARGET)
+    -$(DEL_FILE) $(TARGET0) $(TARGET1) $(TARGET2) $(TARGETA)
+    -$(DEL_FILE) Makefile
 
 
 check: first
@@ -219,7 +219,7 @@ compiler_rcc_make_all:
 compiler_rcc_clean:
 compiler_image_collection_make_all: qmake_image_collection.cpp
 compiler_image_collection_clean:
-	-$(DEL_FILE) qmake_image_collection.cpp
+    -$(DEL_FILE) qmake_image_collection.cpp
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
 compiler_uic_make_all:
@@ -230,71 +230,71 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: 
+compiler_clean:
 
 ####### Compile
 
 WrenGA.o: WrenGA.cpp WrenGA.hpp \
-		Bgs.hpp \
-		BgsParams.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o WrenGA.o WrenGA.cpp
+        Bgs.hpp \
+        BgsParams.hpp
+    $(CXX) -c $(CXXFLAGS) $(INCPATH) -o WrenGA.o WrenGA.cpp
 
 PoppeGMM.o: PoppeGMM.cpp PoppeGMM.hpp \
-		Bgs.hpp \
-		BgsParams.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PoppeGMM.o PoppeGMM.cpp
+        Bgs.hpp \
+        BgsParams.hpp
+    $(CXX) -c $(CXXFLAGS) $(INCPATH) -o PoppeGMM.o PoppeGMM.cpp
 
 GrimsonGMM.o: GrimsonGMM.cpp GrimsonGMM.hpp \
-		Bgs.hpp \
-		BgsParams.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GrimsonGMM.o GrimsonGMM.cpp
+        Bgs.hpp \
+        BgsParams.hpp
+    $(CXX) -c $(CXXFLAGS) $(INCPATH) -o GrimsonGMM.o GrimsonGMM.cpp
 
 Eigenbackground.o: Eigenbackground.cpp Eigenbackground.hpp \
-		Bgs.hpp \
-		BgsParams.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Eigenbackground.o Eigenbackground.cpp
+        Bgs.hpp \
+        BgsParams.hpp
+    $(CXX) -c $(CXXFLAGS) $(INCPATH) -o Eigenbackground.o Eigenbackground.cpp
 
 AdaptiveMedian.o: AdaptiveMedian.cpp AdaptiveMedian.hpp \
-		Bgs.hpp \
-		BgsParams.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o AdaptiveMedian.o AdaptiveMedian.cpp
+        Bgs.hpp \
+        BgsParams.hpp
+    $(CXX) -c $(CXXFLAGS) $(INCPATH) -o AdaptiveMedian.o AdaptiveMedian.cpp
 
 Mean.o: Mean.cpp Mean.hpp \
-		Bgs.hpp \
-		BgsParams.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Mean.o Mean.cpp
+        Bgs.hpp \
+        BgsParams.hpp
+    $(CXX) -c $(CXXFLAGS) $(INCPATH) -o Mean.o Mean.cpp
 
 PratiMediod.o: PratiMediod.cpp PratiMediod.hpp \
-		Bgs.hpp \
-		BgsParams.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PratiMediod.o PratiMediod.cpp
+        Bgs.hpp \
+        BgsParams.hpp
+    $(CXX) -c $(CXXFLAGS) $(INCPATH) -o PratiMediod.o PratiMediod.cpp
 
 ZivkovicGMM.o: ZivkovicGMM.cpp ZivkovicGMM.hpp \
-		Bgs.hpp \
-		BgsParams.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ZivkovicGMM.o ZivkovicGMM.cpp
+        Bgs.hpp \
+        BgsParams.hpp
+    $(CXX) -c $(CXXFLAGS) $(INCPATH) -o ZivkovicGMM.o ZivkovicGMM.cpp
 
 SimpleFrameDifferencing.o: SimpleFrameDifferencing.cpp SimpleFrameDifferencing.hpp \
-		Bgs.hpp \
-		BgsParams.hpp
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SimpleFrameDifferencing.o SimpleFrameDifferencing.cpp
+        Bgs.hpp \
+        BgsParams.hpp
+    $(CXX) -c $(CXXFLAGS) $(INCPATH) -o SimpleFrameDifferencing.o SimpleFrameDifferencing.cpp
 
 ####### Install
 
 install_target: first FORCE
-	@$(CHK_DIR_EXISTS) $(INSTALL_ROOT)/usr/lib/ || $(MKDIR) $(INSTALL_ROOT)/usr/lib/ 
-	-$(INSTALL_PROGRAM) "$(TARGET)" "$(INSTALL_ROOT)/usr/lib/$(TARGET)"
-	-$(STRIP) --strip-unneeded "$(INSTALL_ROOT)/usr/lib/$(TARGET)"
-	-$(SYMLINK) "$(TARGET)" "$(INSTALL_ROOT)/usr/lib/$(TARGET0)"
-	-$(SYMLINK) "$(TARGET)" "$(INSTALL_ROOT)/usr/lib/$(TARGET1)"
-	-$(SYMLINK) "$(TARGET)" "$(INSTALL_ROOT)/usr/lib/$(TARGET2)"
+    @$(CHK_DIR_EXISTS) $(INSTALL_ROOT)/usr/lib/ || $(MKDIR) $(INSTALL_ROOT)/usr/lib/
+    -$(INSTALL_PROGRAM) "$(TARGET)" "$(INSTALL_ROOT)/usr/lib/$(TARGET)"
+    -$(STRIP) --strip-unneeded "$(INSTALL_ROOT)/usr/lib/$(TARGET)"
+    -$(SYMLINK) "$(TARGET)" "$(INSTALL_ROOT)/usr/lib/$(TARGET0)"
+    -$(SYMLINK) "$(TARGET)" "$(INSTALL_ROOT)/usr/lib/$(TARGET1)"
+    -$(SYMLINK) "$(TARGET)" "$(INSTALL_ROOT)/usr/lib/$(TARGET2)"
 
 uninstall_target:  FORCE
-	-$(DEL_FILE) "$(INSTALL_ROOT)/usr/lib/$(TARGET)" 
-	 -$(DEL_FILE) "$(INSTALL_ROOT)/usr/lib/$(TARGET0)" 
-	 -$(DEL_FILE) "$(INSTALL_ROOT)/usr/lib/$(TARGET1)" 
-	 -$(DEL_FILE) "$(INSTALL_ROOT)/usr/lib/$(TARGET2)"
-	-$(DEL_DIR) $(INSTALL_ROOT)/usr/lib/ 
+    -$(DEL_FILE) "$(INSTALL_ROOT)/usr/lib/$(TARGET)"
+     -$(DEL_FILE) "$(INSTALL_ROOT)/usr/lib/$(TARGET0)"
+     -$(DEL_FILE) "$(INSTALL_ROOT)/usr/lib/$(TARGET1)"
+     -$(DEL_FILE) "$(INSTALL_ROOT)/usr/lib/$(TARGET2)"
+    -$(DEL_DIR) $(INSTALL_ROOT)/usr/lib/
 
 
 install:  install_target  FORCE

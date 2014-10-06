@@ -6,10 +6,10 @@ ZivkovicAGMM::ZivkovicAGMM()
 {
     m_params = ZivkovicParams();
 
-    m_num_bands = 3;			//always 3 - not implemented for other values!
-    m_bg_threshold = 0.75f;		//1-cf from the paper
-    m_variance = 36.0f;			// variance for the new mode
-    m_complexity_prior = 0.05f;	// complexity reduction prior constant
+    m_num_bands = 3;            //always 3 - not implemented for other values!
+    m_bg_threshold = 0.75f;        //1-cf from the paper
+    m_variance = 36.0f;            // variance for the new mode
+    m_complexity_prior = 0.05f;    // complexity reduction prior constant
 
     m_frame_num = 0;
 }
@@ -18,10 +18,10 @@ ZivkovicAGMM::ZivkovicAGMM(const BgsParams &p)
 {
     m_params = (ZivkovicParams&)p;
 
-    m_num_bands = 3;			//always 3 - not implemented for other values!
-    m_bg_threshold = 0.75f;		//1-cf from the paper
-    m_variance = 36.0f;			// variance for the new mode
-    m_complexity_prior = 0.05f;	// complexity reduction prior constant
+    m_num_bands = 3;            //always 3 - not implemented for other values!
+    m_bg_threshold = 0.75f;        //1-cf from the paper
+    m_variance = 36.0f;            // variance for the new mode
+    m_complexity_prior = 0.05f;    // complexity reduction prior constant
 
     m_frame_num = 0;
 }
@@ -43,18 +43,18 @@ void ZivkovicAGMM::Initalize(const cv::Mat& image)
     m_modes_per_pixel = new unsigned char[m_params.Size()];
 
     for(unsigned int i = 0; i < m_params.Size(); ++i)
-	{
-		m_modes_per_pixel[i] = 0;
-	}
+    {
+        m_modes_per_pixel[i] = 0;
+    }
 
-	for(unsigned int i = 0; i < m_params.Size()*m_params.MaxModes(); ++i)
-	{
-		m_modes[i].weight = 0;
-		m_modes[i].sigma = 0;
-		m_modes[i].muR = 0;
-		m_modes[i].muG = 0;
-		m_modes[i].muB = 0;
-	}
+    for(unsigned int i = 0; i < m_params.Size()*m_params.MaxModes(); ++i)
+    {
+        m_modes[i].weight = 0;
+        m_modes[i].sigma = 0;
+        m_modes[i].muR = 0;
+        m_modes[i].muG = 0;
+        m_modes[i].muB = 0;
+    }
 
     // background
     m_background = cv::Mat(m_params.Height(), m_params.Width(), image.type());
@@ -82,27 +82,27 @@ void ZivkovicAGMM::Subtract(const cv::Mat& image, cv::Mat& low_threshold_mask, c
         high_threshold_mask.create(m_params.Height(), m_params.Width(), CV_8U);
 
     unsigned char low_threshold, high_threshold;
-    
-	// update each pixel of the image
-	long posPixel;
-	unsigned char* pUsedModes=m_modes_per_pixel;
-	for(unsigned int r = 0; r < m_params.Height(); ++r)
-	{
-		for(unsigned int c = 0; c < m_params.Width(); ++c)
-		{
-			//update model+ background subtract
-			posPixel=(r*m_params.Width()+c)*m_params.MaxModes();
+
+    // update each pixel of the image
+    long posPixel;
+    unsigned char* pUsedModes=m_modes_per_pixel;
+    for(unsigned int r = 0; r < m_params.Height(); ++r)
+    {
+        for(unsigned int c = 0; c < m_params.Width(); ++c)
+        {
+            //update model+ background subtract
+            posPixel=(r*m_params.Width()+c)*m_params.MaxModes();
             SubtractPixel(posPixel, image.at<cv::Vec3b>(r,c), pUsedModes, low_threshold, high_threshold);
-			low_threshold_mask.at<unsigned char>(r,c) = low_threshold;
-			high_threshold_mask.at<unsigned char>(r,c) = high_threshold;
+            low_threshold_mask.at<unsigned char>(r,c) = low_threshold;
+            high_threshold_mask.at<unsigned char>(r,c) = high_threshold;
 
-			m_background.at<cv::Vec3b>(r,c)[0] = (unsigned char)m_modes[posPixel].muR;
-			m_background.at<cv::Vec3b>(r,c)[1] = (unsigned char)m_modes[posPixel].muG;
-			m_background.at<cv::Vec3b>(r,c)[2] = (unsigned char)m_modes[posPixel].muB;
+            m_background.at<cv::Vec3b>(r,c)[0] = (unsigned char)m_modes[posPixel].muR;
+            m_background.at<cv::Vec3b>(r,c)[1] = (unsigned char)m_modes[posPixel].muG;
+            m_background.at<cv::Vec3b>(r,c)[2] = (unsigned char)m_modes[posPixel].muB;
 
-			pUsedModes++;
-		}
-	}
+            pUsedModes++;
+        }
+    }
 
     m_frame_num++;
 }

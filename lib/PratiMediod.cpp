@@ -57,23 +57,23 @@ void PratiMediod::Subtract(const cv::Mat& image, cv::Mat& low_threshold_mask, cv
         high_threshold_mask.create(m_params.Height(), m_params.Width(), CV_8U);
 
     if(m_frame_num < m_params.HistorySize())
-	{
+    {
         low_threshold_mask = cv::Mat::zeros(low_threshold_mask.size(), low_threshold_mask.type());
         high_threshold_mask = cv::Mat::zeros(high_threshold_mask.size(), high_threshold_mask.type());
-		return;
-	}
+        return;
+    }
 
-	// update each pixel of the image
-	for(unsigned int r = 0; r < m_params.Height(); ++r)
-	{
-		for(unsigned int c = 0; c < m_params.Width(); ++c)
-		{	
+    // update each pixel of the image
+    for(unsigned int r = 0; r < m_params.Height(); ++r)
+    {
+        for(unsigned int c = 0; c < m_params.Width(); ++c)
+        {
             // need at least one frame of image before we can start calculating the masks
             CalculateMasks(r, c, image.at<cv::Vec3b>(r,c));
-		}
-	}
+        }
+    }
 
-	// combine low and high threshold masks
+    // combine low and high threshold masks
     Combine(m_mask_low_threshold, m_mask_high_threshold, low_threshold_mask);
     Combine(m_mask_low_threshold, m_mask_high_threshold, high_threshold_mask);
 

@@ -2,8 +2,8 @@
 *
 * Eigenbackground.hpp
 *
-* Purpose: Implementation of the Eigenbackground background subtraction 
-*		   algorithm developed by Oliver et al.
+* Purpose: Implementation of the Eigenbackground background subtraction
+*          algorithm developed by Oliver et al.
 *
 *          "A Bayesian Computer Vision System for Modeling Human Interactions"
 *           Nuria Oliver, Barbara Rosario, Alex P. Pentland 2000
@@ -30,20 +30,20 @@ public:
         m_dim = 20;
         m_precision = 2;
         m_low_threshold = 50;
-        m_high_threshold = 2*m_low_threshold;	// Note: high threshold is used by post-processing
+        m_high_threshold = 2*m_low_threshold;    // Note: high threshold is used by post-processing
     }
 
     int &HistorySize() { return m_history_size; }
-	int &EmbeddedDim() { return m_dim; }
+    int &EmbeddedDim() { return m_dim; }
     float &RetainedVar() { return m_var; }
     int &Precision() { return m_precision; }
 
-	void write(cv::FileStorage& fs) const {} // write serialization
+    void write(cv::FileStorage& fs) const {} // write serialization
     void read(const cv::FileNode& node){} // read serialization
 
 private:
-	int m_history_size;			// number frames used to create eigenspace
-    int m_dim;					// eigenspace dimensionality
+    int m_history_size;            // number frames used to create eigenspace
+    int m_dim;                    // eigenspace dimensionality
     float m_var;
     int m_precision;
 };
@@ -56,9 +56,9 @@ namespace bgs
 class Eigenbackground : public Bgs
 {
 public:
-	Eigenbackground();
+    Eigenbackground();
     Eigenbackground(const BgsParams& p);
-	~Eigenbackground();
+    ~Eigenbackground();
 
     void Save(std::string file = "Eigenbackground.xml");
     void Load(std::string file = "Eigenbackground.xml");
@@ -73,17 +73,17 @@ public:
     void Subtract(const cv::Mat& image, cv::Mat& low_threshold_mask, cv::Mat& high_threshold_mask);
     void Update(const cv::Mat& image,  const cv::Mat& update_mask);
 
-	cv::Mat Background() { return m_background; }
+    cv::Mat Background() { return m_background; }
 
 private:
     void Initalize(const cv::Mat& image);
     void UpdateHistory(const cv::Mat& newFrame);
 
-	EigenbackgroundParams m_params;
+    EigenbackgroundParams m_params;
     cv::Mat m_pcaImages;
     int m_K;
     cv::PCA m_pca;
-	cv::Mat m_background;
+    cv::Mat m_background;
 };
 
 }

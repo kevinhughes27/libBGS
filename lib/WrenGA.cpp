@@ -34,19 +34,19 @@ void WrenGA::Initalize(const cv::Mat& image)
     m_gaussian.resize(m_params.Size());
 
     int pos = 0;
-	for(unsigned int r = 0; r < m_params.Height(); ++r)
-	{
-		for(unsigned int c = 0; c < m_params.Width(); ++c)
-		{
-			for(int ch = 0; ch < 3; ++ch)
-			{	
+    for(unsigned int r = 0; r < m_params.Height(); ++r)
+    {
+        for(unsigned int c = 0; c < m_params.Width(); ++c)
+        {
+            for(int ch = 0; ch < 3; ++ch)
+            {
                 m_gaussian[pos].mu[ch] = image.at<cv::Vec3b>(r,c)[ch];
-				m_gaussian[pos].var[ch] = m_variance;
-			}
+                m_gaussian[pos].var[ch] = m_variance;
+            }
 
-			pos++;
-		}
-	}
+            pos++;
+        }
+    }
 
     // background
     m_background = cv::Mat(m_params.Height(), m_params.Width(), CV_8UC3);
@@ -75,16 +75,16 @@ void WrenGA::Subtract(const cv::Mat& image, cv::Mat& low_threshold_mask, cv::Mat
 
     unsigned char low_threshold, high_threshold;
 
-	// update each pixel of the image
-	for(unsigned int r = 0; r < m_params.Height(); ++r)
-	{
-		for(unsigned int c = 0; c < m_params.Width(); ++c)
-		{
+    // update each pixel of the image
+    for(unsigned int r = 0; r < m_params.Height(); ++r)
+    {
+        for(unsigned int c = 0; c < m_params.Width(); ++c)
+        {
             SubtractPixel(r, c, image.at<cv::Vec3b>(r,c), low_threshold, high_threshold);
-			low_threshold_mask.at<unsigned char>(r,c) = low_threshold;
-			high_threshold_mask.at<unsigned char>(r,c) = high_threshold;
-		}
-	}
+            low_threshold_mask.at<unsigned char>(r,c) = low_threshold;
+            high_threshold_mask.at<unsigned char>(r,c) = high_threshold;
+        }
+    }
 
     m_frame_num++;
 }

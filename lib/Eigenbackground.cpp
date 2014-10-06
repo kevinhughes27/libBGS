@@ -152,10 +152,10 @@ void Eigenbackground::Subtract(const cv::Mat& image, cv::Mat& low_threshold_mask
 
     // create eigenbackground
     if(m_frame_num == m_params.HistorySize())
-	{
+    {
         //std::cout << "==" << std::endl;
-		
-		// create the eigenspace
+
+        // create the eigenspace
         if(m_params.EmbeddedDim() == 0)
         {
             m_pca = cv::PCA(m_pcaImages, cv::Mat(), CV_PCA_DATA_AS_ROW, m_params.RetainedVar());
@@ -167,28 +167,28 @@ void Eigenbackground::Subtract(const cv::Mat& image, cv::Mat& low_threshold_mask
 
         // free the image
         //m_pcaImages.release();
-	}
+    }
 
     if(m_frame_num >= m_params.HistorySize())
-	{
+    {
         //std::cout << ">=" << std::endl;
 
         // project new image into the eigenspace
         cv::Mat image_row = image.clone().reshape(1,1);
         cv::Mat point = m_pca.project(image_row);
-		
-		// reconstruct point
+
+        // reconstruct point
         cv::Mat reconstruction = m_pca.backProject(point);
-        
-		// calculate Euclidean distance between new image and its eigenspace projection
-		int index = 0;
-		for(unsigned int r = 0; r < m_params.Height(); ++r)
-		{
-			for(unsigned int c = 0; c < m_params.Width(); ++c)
-			{
-				double dist = 0;
-				bool bgLow = true;
-				bool bgHigh = true;
+
+        // calculate Euclidean distance between new image and its eigenspace projection
+        int index = 0;
+        for(unsigned int r = 0; r < m_params.Height(); ++r)
+        {
+            for(unsigned int c = 0; c < m_params.Width(); ++c)
+            {
+                double dist = 0;
+                bool bgLow = true;
+                bool bgHigh = true;
 
                 if(m_params.Channels() == 3)
                 {
@@ -219,44 +219,44 @@ void Eigenbackground::Subtract(const cv::Mat& image, cv::Mat& low_threshold_mask
                         bgHigh = false;
                     index++;
                 }
-				
-				if(!bgLow)
-				{
-					low_threshold_mask.at<unsigned char>(r,c) = FOREGROUND;
-				}
-				else
-				{
-					low_threshold_mask.at<unsigned char>(r,c) = BACKGROUND;
-				}
 
-				if(!bgHigh)
-				{
-					high_threshold_mask.at<unsigned char>(r,c) = FOREGROUND;
-				}
-				else
-				{
-					high_threshold_mask.at<unsigned char>(r,c) = BACKGROUND;
-				}
-			}
-		}
-	}
-	else 
-	{
+                if(!bgLow)
+                {
+                    low_threshold_mask.at<unsigned char>(r,c) = FOREGROUND;
+                }
+                else
+                {
+                    low_threshold_mask.at<unsigned char>(r,c) = BACKGROUND;
+                }
+
+                if(!bgHigh)
+                {
+                    high_threshold_mask.at<unsigned char>(r,c) = FOREGROUND;
+                }
+                else
+                {
+                    high_threshold_mask.at<unsigned char>(r,c) = BACKGROUND;
+                }
+            }
+        }
+    }
+    else
+    {
         //std::cout << "else" << std::endl;
 
         UpdateHistory(image);
 
-		// set entire image to background since there is not enough information yet
-		// to start performing background subtraction
-		for(unsigned int r = 0; r < m_params.Height(); ++r)
-		{
-			for(unsigned int c = 0; c < m_params.Width(); ++c)
-			{
-				low_threshold_mask.at<unsigned char>(r,c) = BACKGROUND;
-				high_threshold_mask.at<unsigned char>(r,c) = BACKGROUND;
-			}
-		}
-	}
+        // set entire image to background since there is not enough information yet
+        // to start performing background subtraction
+        for(unsigned int r = 0; r < m_params.Height(); ++r)
+        {
+            for(unsigned int c = 0; c < m_params.Width(); ++c)
+            {
+                low_threshold_mask.at<unsigned char>(r,c) = BACKGROUND;
+                high_threshold_mask.at<unsigned char>(r,c) = BACKGROUND;
+            }
+        }
+    }
 
     m_frame_num++;
 }

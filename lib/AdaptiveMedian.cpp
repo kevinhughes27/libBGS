@@ -75,15 +75,15 @@ void AdaptiveMedian::Subtract(const cv::Mat& image, cv::Mat& low_threshold_mask,
 void AdaptiveMedian::Update(const cv::Mat& image,  const cv::Mat& update_mask)
 {
     if(m_frame_num % m_params.SamplingRate() == 1)
-	{
-		// update background model
-		for (unsigned int r = 0; r < m_params.Height(); ++r)
-		{
-			for(unsigned int c = 0; c < m_params.Width(); ++c)
-			{
-				// perform conditional updating only if we are passed the learning phase
+    {
+        // update background model
+        for (unsigned int r = 0; r < m_params.Height(); ++r)
+        {
+            for(unsigned int c = 0; c < m_params.Width(); ++c)
+            {
+                // perform conditional updating only if we are passed the learning phase
                 if(update_mask.at<unsigned char>(r,c) == BACKGROUND || m_frame_num < m_params.LearningFrames())
-				{
+                {
                     if(m_params.Channels() == 3)
                     {
                         for(int ch = 0; ch < 3; ++ch)
@@ -110,30 +110,30 @@ void AdaptiveMedian::Update(const cv::Mat& image,  const cv::Mat& update_mask)
                         }
                     }
 
-				}
-			}
-		}
-	}
+                }
+            }
+        }
+    }
 }
 
 void AdaptiveMedian::SubtractPixel(int r, int c, const cv::Vec3b pixel, unsigned char& low_threshold, unsigned char& high_threshold)
 {
-	// perform background subtraction
-	low_threshold = high_threshold = FOREGROUND;
-	
-	int diffR = abs(pixel[0] - m_median.at<cv::Vec3b>(r,c)[0]);
-	int diffG = abs(pixel[1] - m_median.at<cv::Vec3b>(r,c)[1]);
-	int diffB = abs(pixel[2] - m_median.at<cv::Vec3b>(r,c)[2]);
-	
-	if(diffR <= m_params.LowThreshold() && diffG <= m_params.LowThreshold() &&  diffB <= m_params.LowThreshold())
-	{
-		low_threshold = BACKGROUND;
-	}
+    // perform background subtraction
+    low_threshold = high_threshold = FOREGROUND;
 
-	if(diffR <= m_params.HighThreshold() && diffG <= m_params.HighThreshold() &&  diffB <= m_params.HighThreshold())
-	{
-		high_threshold = BACKGROUND;
-	}
+    int diffR = abs(pixel[0] - m_median.at<cv::Vec3b>(r,c)[0]);
+    int diffG = abs(pixel[1] - m_median.at<cv::Vec3b>(r,c)[1]);
+    int diffB = abs(pixel[2] - m_median.at<cv::Vec3b>(r,c)[2]);
+
+    if(diffR <= m_params.LowThreshold() && diffG <= m_params.LowThreshold() &&  diffB <= m_params.LowThreshold())
+    {
+        low_threshold = BACKGROUND;
+    }
+
+    if(diffR <= m_params.HighThreshold() && diffG <= m_params.HighThreshold() &&  diffB <= m_params.HighThreshold())
+    {
+        high_threshold = BACKGROUND;
+    }
 }
 
 void AdaptiveMedian::SubtractPixel(int r, int c, const unsigned char pixel, unsigned char& low_threshold, unsigned char& high_threshold)

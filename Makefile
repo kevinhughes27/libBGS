@@ -9,5 +9,5 @@ SRCS = main.cpp
 PROG = runBGS
 
 $(PROG) : $(SRCS)
-	$(CC) $(CFLAGS) -o $(PROG) $(SRCS) $(LIBS); 
-	
+    $(CC) $(CFLAGS) -o $(PROG) $(SRCS) $(LIBS);
+

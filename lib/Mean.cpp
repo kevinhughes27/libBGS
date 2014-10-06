@@ -53,23 +53,23 @@ void Mean::Subtract(const cv::Mat& image, cv::Mat& low_threshold_mask, cv::Mat& 
         high_threshold_mask.create(m_params.Height(), m_params.Width(), CV_8U);
 
     unsigned char low_threshold, high_threshold;
-    
-	// update each pixel of the image
-	for(unsigned int r = 0; r < m_params.Height(); ++r)
-	{
-		for(unsigned int c = 0; c < m_params.Width(); ++c)
-		{	
-			// perform background subtraction + update background model
+
+    // update each pixel of the image
+    for(unsigned int r = 0; r < m_params.Height(); ++r)
+    {
+        for(unsigned int c = 0; c < m_params.Width(); ++c)
+        {
+            // perform background subtraction + update background model
             if(m_params.Channels() == 3)
                 SubtractPixel(r, c, image.at<cv::Vec3b>(r,c), low_threshold, high_threshold);
             else
                 SubtractPixel(r, c, image.at<unsigned char>(r,c), low_threshold, high_threshold);
 
-			// setup silhouette mask
-			low_threshold_mask.at<unsigned char>(r,c) = low_threshold;
-			high_threshold_mask.at<unsigned char>(r,c) = high_threshold;
-		}
-	}
+            // setup silhouette mask
+            low_threshold_mask.at<unsigned char>(r,c) = low_threshold;
+            high_threshold_mask.at<unsigned char>(r,c) = high_threshold;
+        }
+    }
 
     m_frame_num++;
 }

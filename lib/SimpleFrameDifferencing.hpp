@@ -3,7 +3,7 @@
 * SimpleFrameDifferencing.hpp
 *
 * Purpose: Implementation of a simple frame differencing background
-*		   subtraction algorithm.
+*          subtraction algorithm.
 *
 * Author: Kevin Hughes, 2012
 *
@@ -59,7 +59,7 @@ public:
 
     cv::Mat Background() { return m_frameBuffer.front(); }
 
-private:	
+private:
     void Initalize(const cv::Mat& image);
     void SubtractPixel(int r, int c, const cv::Vec3b& pixel, unsigned char& low_threshold, unsigned char& high_threshold);
     void SubtractPixel(int r, int c, const unsigned char pixel, unsigned char& low_threshold, unsigned char& high_threshold);
